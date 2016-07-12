@@ -23,7 +23,6 @@ struct node* createNode(int data) {
     return temp;
 }
 
-
 bool isEmpty(struct Queue *queue) {
     if(queue->head == -1)
         return true;
