@@ -76,8 +76,7 @@ void levelOrderTraversal(struct node *root, int noOfNodes) {
     }
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
 	struct node* node1 = createNode(1);    
     struct node* node2 = createNode(2);
     struct node* node3 = createNode(3);
