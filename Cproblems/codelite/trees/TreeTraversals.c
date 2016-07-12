@@ -1,4 +1,4 @@
-// Lever order traversal of a tree
+// Traversals of a tree
 
 #include <stdio.h>
 
