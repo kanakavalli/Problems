@@ -32,6 +32,8 @@ bool isEmpty(struct Queue *queue) {
 }
 
 void pushToQueue(struct Queue *queue, struct node *tempNode) {
+    if(tempNode == NULL)
+        return;
     if(isEmpty(queue)) {
         ++queue->head;
         ++queue->tail;
@@ -66,14 +68,31 @@ void levelOrderTraversal(struct node *root, int noOfNodes) {
     struct Queue *queue = createQueue(noOfNodes);
     struct node *tempNode = root;
     pushToQueue(queue, tempNode);
-    while(tempNode != NULL) {
-        if(tempNode->left != NULL)
-            pushToQueue(queue, tempNode->left);
-        if(tempNode->right != NULL)
-            pushToQueue(queue, tempNode->right);
-        struct node *poppedNode = popFromQueue(queue);
-        printf("\n %d ", poppedNode->value);
-        tempNode = queue->array[queue->head];
+    struct node *headNode1 = queue->array[queue->head];
+    struct node *headNode2 = queue->array[queue->head +1];
+    while(headNode1 != NULL || headNode2 != NULL) {
+        if(headNode1 != NULL && headNode2 == NULL) {
+            pushToQueue(queue, headNode1->left);
+            pushToQueue(queue, headNode1->right);
+        } else if(headNode2 != NULL && headNode1 == NULL) {
+            pushToQueue(queue, headNode2->right);
+            pushToQueue(queue, headNode2->left);
+        } else {
+            pushToQueue(queue, headNode1->left);
+            pushToQueue(queue, headNode2->right);
+            pushToQueue(queue, headNode1->right);
+            pushToQueue(queue, headNode2->left);
+        }
+        if(headNode1 != NULL) {
+            struct node *poppedHeadNode1 = popFromQueue(queue);
+            printf("\n %d ", poppedHeadNode1->value);
+        }
+        if(headNode2 != NULL) {
+            struct node *poppedHeadNode2 = popFromQueue(queue);
+            printf("\n %d ", poppedHeadNode2->value);
+        }
+        headNode1 = queue->array[queue->head];
+        headNode2 = queue->array[queue->head +1];
     }
 }
 
@@ -85,6 +104,14 @@ int main(int argc, char **argv) {
     struct node* node5 = createNode(5);
     struct node* node6 = createNode(6);
     struct node* node7 = createNode(7);
+    struct node* node8 = createNode(8);
+    struct node* node9 = createNode(9);
+    struct node* node10 = createNode(10);
+    struct node* node11 = createNode(11);
+    struct node* node12 = createNode(12);
+    struct node* node13 = createNode(13);
+    struct node* node14 = createNode(14);
+    struct node* node15 = createNode(15);
     
     node1->left = node2;
     node1->right = node3;
@@ -95,6 +122,18 @@ int main(int argc, char **argv) {
     node3->left = node6;
     node3->right = node7;
     
-    levelOrderTraversal(node1, 7);
+    node4->left = node8;
+    node4->right = node9;
+
+    node5->left = node10;
+    node5->right = node11;
+    
+    node6->left = node12;
+    node6->right = node13;
+
+    node7->left = node14;
+    node7->right = node15;
+    
+    levelOrderTraversal(node1, 15);
 	return 0;
 }

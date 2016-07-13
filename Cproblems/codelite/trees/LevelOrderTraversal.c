@@ -31,6 +31,8 @@ bool isEmpty(struct Queue *queue) {
 }
 
 void pushToQueue(struct Queue *queue, struct node *tempNode) {
+    if(tempNode == NULL)
+        return;
     if(isEmpty(queue)) {
         ++queue->head;
         ++queue->tail;
@@ -66,10 +68,8 @@ void levelOrderTraversal(struct node *root, int noOfNodes) {
     struct node *tempNode = root;
     pushToQueue(queue, tempNode);
     while(tempNode != NULL) {
-        if(tempNode->left != NULL)
-            pushToQueue(queue, tempNode->left);
-        if(tempNode->right != NULL)
-            pushToQueue(queue, tempNode->right);
+        pushToQueue(queue, tempNode->left);
+        pushToQueue(queue, tempNode->right);
         struct node *poppedNode = popFromQueue(queue);
         printf("\n %d ", poppedNode->value);
         tempNode = queue->array[queue->head];
