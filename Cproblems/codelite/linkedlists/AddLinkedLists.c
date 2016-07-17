@@ -33,12 +33,14 @@ struct node* addLinkedLists(struct node *ll1, struct node *ll2) {
     struct node *head2 = ll2;
     int carry = 0;
     while(head1 != NULL || head2 != NULL) {
-        int head1Value = head1 ? head1->value : 0;
-        int head2Value = head1 ? head2->value : 0;
+        int head1Value = (head1 != NULL) ? head1->value : 0;
+        int head2Value = (head2 != NULL) ? head2->value : 0;
         int sumOfTwoNodes = head1Value + head2Value + carry;
         if(sumOfTwoNodes > 9) {
             carry = 1;
             sumOfTwoNodes = sumOfTwoNodes%10;
+        } else {
+            carry = 0;
         }
         if(resultList != NULL) {
             resultList->next = createNode(sumOfTwoNodes);
@@ -47,8 +49,8 @@ struct node* addLinkedLists(struct node *ll1, struct node *ll2) {
             resultList = createNode(sumOfTwoNodes);
             newListHead = resultList;
         }
-        head1 = head1->next;
-        head2 = head2->next;
+        head1 = (head1 != NULL) ? head1->next : NULL;
+        head2 = (head2 != NULL) ? head2->next : NULL;
     }
     return newListHead;
 }
