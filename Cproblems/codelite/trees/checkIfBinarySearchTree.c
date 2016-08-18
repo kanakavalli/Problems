@@ -22,7 +22,7 @@ bool isLeafNode(struct node *root) {
 bool isBinarySearchTree(struct node *root, int min, int max) {
     if(root == NULL)
         return true;
-    if((root->value < min && root->value > max)) {
+    if((root->value < min || root->value > max)) {
         return false;
     }
     bool isLeftBST = isBinarySearchTree(root->left, min, root->value-1);
