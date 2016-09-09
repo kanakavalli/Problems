@@ -2,6 +2,8 @@
 
 //Yet to finish this - TODO
 
+//Please find the updated code in JS folder of the repo.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
